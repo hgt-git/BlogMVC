@@ -1,0 +1,64 @@
+﻿@model ICollection<BlogMVC.Models.ImageViewModel>
+@{
+    ViewBag.Title = "ShowImages";
+}
+<br />
+<br />
+<h2>ShowImages</h2>
+
+@using (Html.BeginForm("FinalizingCreation", "Blog", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+            int i = 0;
+            foreach (var item in Model)
+            {
+                @Html.CheckBox(item.Name, false, new { id = item.Id, Name = "imageCheckBox", value=item.Id })
+                <label for=@item.Id>  <img style ="height: 200px; width: 200px;" src="/UploadedImages/@item.ImageFile" /></label>
+
+                i++;
+                if (i % 4 == 0)
+                {
+                <br />
+                }
+                else
+                {
+                    @:&emsp;&emsp;
+                }
+
+            }
+    <br />
+    <input type="submit" value="Select and Finish" class="btn btn-primary" />
+}
+
+
+<br/>
+
+<h2>Upload New Images</h2>
+
+@using (Html.BeginForm("UploadImages", "Blog", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+      
+        <input type="file" title="search image" id="files" name="files" multiple="multiple" />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Upload" class="btn btn-primary" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10 text-success">
+                @ViewBag.UploadStatus
+            </div>
+        </div>
+
+    </div>
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+

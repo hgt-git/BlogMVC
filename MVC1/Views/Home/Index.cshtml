@@ -1,0 +1,41 @@
+﻿@model IEnumerable<BlogMVC.Models.BlogPostModel>
+@{
+    ViewBag.Title = "Posts";
+}
+
+<br />
+<h1>Posts</h1>
+<hr />
+<br />
+<div class="allPosts">
+    <table id="memberlist">
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <h3>@Html.DisplayFor(modelItem => item.Title)</h3>
+                        <p><h5>@Html.DisplayFor(modelItem => item.Description)</h5></p>
+                        <div class="moreInfo">
+                            <p>Posted on: @Html.DisplayFor(modelItem => item.PostedOn)</p>
+                            @if (item.Modified != null)
+                            {<p> Edited on:@Html.DisplayFor(modelItem => item.Modified)</p>}
+                            <p> Viewed: <span class="badge"> @Html.DisplayFor(modelItem => item.Viewed)</span></p>
+                        </div>
+                        @Html.ActionLink("Read Article", "Details", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        <br />
+                        <br />
+                    </td>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
+

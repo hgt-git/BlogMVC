@@ -1,0 +1,30 @@
+﻿@model BlogMVC.Models.BlogPostModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<br>
+<h2>Delete Post</h2>
+<br>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <h3 style="text-align: center">
+        @Html.DisplayFor(model => model.Title)
+    </h3>
+
+    @Html.DisplayFor(model => model.Text)
+
+    <br>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-primary " />
+            <p> @Html.ActionLink("Back to List", "Index")</p>
+
+        </div>
+    }
+</div>

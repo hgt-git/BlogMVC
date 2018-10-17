@@ -1,0 +1,26 @@
+﻿@model BlogMVC.Models.BlogPostViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<br>
+
+<h2 style="text-align: center">@Html.DisplayFor(model => model.Title)</h2>
+
+<div>
+    <hr />
+    @Html.DisplayFor(model => model.Text)
+</div>
+<br>
+<div>
+    @foreach (var item in Model.Images)
+    {
+        <img style="height: 200px; width: 200px;" src="/UploadedImages/@item.ImageFile" />
+    }
+</div>
+<div>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>

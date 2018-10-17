@@ -1,0 +1,56 @@
+﻿@model BlogMVC.Models.BlogPostModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<br>
+<h2>Edit Post</h2>
+<br>
+<div class="col-md-offset-2 col-md-10 text-success">
+    @ViewBag.ManagingImages
+</div>
+<br>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+      
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.PostedOn)
+        @Html.HiddenFor(model => model.Viewed)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Text,  new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Text, new  { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Manage Images", "ManageImagesInPost")
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
